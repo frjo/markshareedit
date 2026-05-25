@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_POST
 
 from .models import Document
@@ -58,5 +59,5 @@ def document_delete(request, pk):
     if document.created_by != request.user and not request.user.is_staff:
         return HttpResponseForbidden()
     document.delete()
-    messages.success(request, "Document deleted.")
+    messages.success(request, _("Document deleted."))
     return redirect("document_list")

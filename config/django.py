@@ -21,6 +21,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -49,7 +50,7 @@ LOGOUT_REDIRECT_URL = "/"
 # Internationalisation
 # ---------------------------------------------------------------------------
 TIME_ZONE = "UTC"
-USE_I18N = False
+USE_I18N = True
 USE_TZ = True
 DATE_FORMAT = "j N Y"
 DATETIME_FORMAT = "j N Y, H:i"

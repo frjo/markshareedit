@@ -13,6 +13,7 @@ from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_GET, require_POST
 from django_ratelimit.decorators import ratelimit
 from webauthn import (
@@ -101,17 +102,17 @@ def register_username(request):
     try:
         body = json.loads(request.body)
     except (json.JSONDecodeError, ValueError):
-        return JsonResponse({"error": "Invalid request body."}, status=400)
+        return JsonResponse({"error": _("Invalid request body.")}, status=400)
 
     username = nh3.clean(body.get("username", "").strip(), tags=set())
     if username:
         if not (3 <= len(username) <= 50):
             return JsonResponse(
-                {"error": "Username must be 3–50 characters."},
+                {"error": _("Username must be 3–50 characters.")},
                 status=400,
             )
         if User.objects.filter(username=username).exists():
-            return JsonResponse({"error": "That username is already taken."}, status=400)
+            return JsonResponse({"error": _("That username is already taken.")}, status=400)
 
     request.session["reg_username"] = username
     return JsonResponse({"status": "ok"})
@@ -123,7 +124,7 @@ def register_begin(request):
     """Begin passkey registration for a new user."""
     if "reg_username" not in request.session:
         return JsonResponse(
-            {"error": "No registration session found. Please start over."}, status=400
+            {"error": _("No registration session found. Please start over.")}, status=400
         )
 
     username = request.session["reg_username"]
@@ -147,11 +148,11 @@ def register_complete(request):
 
     if not challenge_b64 or "reg_username" not in request.session:
         return JsonResponse(
-            {"error": "Registration session expired. Please try again."}, status=400
+            {"error": _("Registration session expired. Please try again.")}, status=400
         )
 
     if username and User.objects.filter(username=username).exists():
-        return JsonResponse({"error": "That username is already taken."}, status=400)
+        return JsonResponse({"error": _("That username is already taken.")}, status=400)
 
     try:
         challenge = base64.b64decode(challenge_b64)
@@ -159,7 +160,7 @@ def register_complete(request):
         verification, transports = _verify_registration(data, challenge)
     except Exception:
         logger.exception("WebAuthn registration verification failed")
-        return JsonResponse({"error": "Verification failed. Please try again."}, status=400)
+        return JsonResponse({"error": _("Verification failed. Please try again.")}, status=400)
 
     user = User.objects.create_user(username=username)
     WebAuthnCredential.objects.create(
@@ -212,7 +213,7 @@ def login_complete(request):
     challenge_b64 = request.session.get("auth_challenge", "")
     if not challenge_b64:
         return JsonResponse(
-            {"error": "Authentication session expired. Please try again."},
+            {"error": _("Authentication session expired. Please try again.")},
             status=400,
         )
 
@@ -261,7 +262,7 @@ def login_complete(request):
                     verification.new_sign_count,
                 )
                 return JsonResponse(
-                    {"error": "Authentication failed. Please try again."}, status=401
+                    {"error": _("Authentication failed. Please try again.")}, status=401
                 )
 
             stored.sign_count = verification.new_sign_count
@@ -273,7 +274,7 @@ def login_complete(request):
             "audit: login failed (unknown credential) ip=%s",
             request.META.get("REMOTE_ADDR"),
         )
-        return JsonResponse({"error": "Passkey not recognised."}, status=401)
+        return JsonResponse({"error": _("Passkey not recognised.")}, status=401)
     except Exception:
         logger.exception("WebAuthn authentication verification failed")
         logger.warning(
@@ -281,7 +282,7 @@ def login_complete(request):
             request.META.get("REMOTE_ADDR"),
         )
         return JsonResponse(
-            {"error": "Authentication failed. Please try again."}, status=401
+            {"error": _("Authentication failed. Please try again.")}, status=401
         )
 
     request.session.pop("auth_challenge", None)
@@ -324,7 +325,7 @@ def passkey_add_begin(request):
     user = request.user
     if user.credentials.count() >= _MAX_PASSKEYS:
         return JsonResponse(
-            {"error": f"You have reached the maximum number of passkeys ({_MAX_PASSKEYS})."},
+            {"error": _("You have reached the maximum number of passkeys (%(max)s).") % {"max": _MAX_PASSKEYS}},
             status=400,
         )
     display_name = user.username or user.get_display_name
@@ -347,7 +348,7 @@ def passkey_add_complete(request):
     """Complete adding a new passkey for an already-authenticated user."""
     challenge_b64 = request.session.get("add_passkey_challenge", "")
     if not challenge_b64:
-        return JsonResponse({"error": "Session expired. Please try again."}, status=400)
+        return JsonResponse({"error": _("Session expired. Please try again.")}, status=400)
 
     try:
         challenge = base64.b64decode(challenge_b64)
@@ -355,7 +356,7 @@ def passkey_add_complete(request):
         verification, transports = _verify_registration(data, challenge)
     except Exception:
         logger.exception("WebAuthn passkey-add verification failed")
-        return JsonResponse({"error": "Verification failed. Please try again."}, status=400)
+        return JsonResponse({"error": _("Verification failed. Please try again.")}, status=400)
 
     credential = WebAuthnCredential.objects.create(
         user=request.user,
@@ -383,12 +384,12 @@ def passkey_delete(request, pk: str):
     """Delete one of the authenticated user's passkeys."""
     user = request.user
     if user.credentials.count() <= 1:
-        messages.error(request, "You must keep at least one passkey.")
+        messages.error(request, _("You must keep at least one passkey."))
         return redirect("account")
     try:
         credential = user.credentials.get(pk=pk)
     except user.credentials.model.DoesNotExist:
-        messages.error(request, "Passkey not found.")
+        messages.error(request, _("Passkey not found."))
         return redirect("account")
     credential.delete()
     logger.info(
@@ -404,7 +405,7 @@ def passkey_delete(request, pk: str):
             "accounts/_passkeys_list.html",
             {"credentials": credentials},
         )
-    messages.success(request, "Passkey deleted.")
+    messages.success(request, _("Passkey deleted."))
     return redirect("account")
 
 
@@ -427,12 +428,12 @@ def account_view(request):
 
         new_username = nh3.clean(request.POST.get("username", "").strip(), tags=set())
         if not (3 <= len(new_username) <= 50):
-            messages.error(request, "Username must be 3–50 characters.")
+            messages.error(request, _("Username must be 3–50 characters."))
         elif (
             new_username != user.username
             and User.objects.filter(username=new_username).exists()
         ):
-            messages.error(request, "That username is already taken.")
+            messages.error(request, _("That username is already taken."))
         else:
             old_username = user.username
             user.username = new_username
@@ -444,7 +445,7 @@ def account_view(request):
                 new_username,
                 request.META.get("REMOTE_ADDR"),
             )
-            messages.success(request, "Username updated.")
+            messages.success(request, _("Username updated."))
 
         return redirect("account")
 

@@ -1,0 +1,347 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-25 17:50+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/accounts/_passkeys_list.html:7
+#, python-format
+msgid "Passkey %(counter)s"
+msgstr "Passkey %(counter)s"
+
+#: accounts/templates/accounts/_passkeys_list.html:8
+msgid "added"
+msgstr "tillagd"
+
+#: accounts/templates/accounts/_passkeys_list.html:9
+msgid "last used"
+msgstr "senast använd"
+
+#: accounts/templates/accounts/_passkeys_list.html:17
+msgid "Delete this passkey?"
+msgstr "Radera denna passkey?"
+
+#: accounts/templates/accounts/_passkeys_list.html:18
+#: editor/templates/editor/document_list.html:29
+msgid "Delete"
+msgstr "Radera"
+
+#: accounts/templates/accounts/_passkeys_list.html:24
+msgid "No passkeys found."
+msgstr "Inga passkeys hittades."
+
+#: accounts/templates/accounts/account.html:3
+#: accounts/templates/accounts/account.html:7
+msgid "Account"
+msgstr "Konto"
+
+#: accounts/templates/accounts/account.html:10
+msgid "Profile"
+msgstr "Profil"
+
+#: accounts/templates/accounts/account.html:12
+msgid "Account ID"
+msgstr "Konto-ID"
+
+#: accounts/templates/accounts/account.html:19
+msgid "Display username"
+msgstr "Visningsnamn"
+
+#: accounts/templates/accounts/account.html:30
+msgid "3–50 characters."
+msgstr "3–50 tecken."
+
+#: accounts/templates/accounts/account.html:32
+msgid "Update username"
+msgstr "Uppdatera användarnamnet"
+
+#: accounts/templates/accounts/account.html:37
+msgid "Passkeys"
+msgstr "Passkeys"
+
+#: accounts/templates/accounts/account.html:41
+msgid "Add a passkey"
+msgstr "Lägg till en passkey"
+
+#: accounts/templates/accounts/account.html:46
+msgid "Could not begin passkey registration."
+msgstr "Kunde inte påbörja passkey-registrering."
+
+#: accounts/templates/accounts/account.html:47
+msgid "Passkey registration failed."
+msgstr "Passkey-registrering misslyckades."
+
+#: accounts/templates/accounts/account.html:48
+#: accounts/templates/accounts/register.html:18
+msgid "A passkey for this authenticator is already registered."
+msgstr "En passkey för denna autentikator är redan registrerad."
+
+#: accounts/templates/accounts/account.html:52
+msgid "Passkey name (optional)"
+msgstr "Passkey-namn (valfritt)"
+
+#: accounts/templates/accounts/account.html:53
+msgid "e.g. MacBook Touch ID"
+msgstr "t.ex. MacBook Touch ID"
+
+#: accounts/templates/accounts/account.html:56
+msgid "Add passkey"
+msgstr "Lägg till passkey"
+
+#: accounts/templates/accounts/login.html:3
+#: accounts/templates/accounts/login.html:7
+#: accounts/templates/accounts/register.html:44
+#: home/templates/home/index.html:10
+msgid "Log in"
+msgstr "Logga in"
+
+#: accounts/templates/accounts/login.html:8
+msgid "Use a passkey saved on this device to log in."
+msgstr "Använd en passkey sparad på den här enheten för att logga in."
+
+#: accounts/templates/accounts/login.html:24
+msgid "Log in with passkey"
+msgstr "Logga in med passkey"
+
+#: accounts/templates/accounts/login.html:27
+#: accounts/templates/accounts/register.html:43
+msgid "Your browser does not support passkeys."
+msgstr "Din webbläsare stöder inte passkeys."
+
+#: accounts/templates/accounts/login.html:28
+msgid "Don't have an account yet?"
+msgstr "Har du inget konto ännu?"
+
+#: accounts/templates/accounts/login.html:28 home/templates/home/index.html:11
+msgid "Create account"
+msgstr "Skapa konto"
+
+#: accounts/templates/accounts/register.html:3
+msgid "Register"
+msgstr "Registrera"
+
+#: accounts/templates/accounts/register.html:7
+msgid "Create an account"
+msgstr "Skapa ett konto"
+
+#: accounts/templates/accounts/register.html:8
+msgid ""
+"Optionally choose a username, then follow the prompt to create a passkey on "
+"this device. You can set or change your username later on the account page."
+msgstr ""
+"Välj ett användarnamn om du vill, följ sedan anvisningarna för att skapa en "
+"passkey på den här enheten. Du kan ange eller ändra ditt användarnamn senare "
+"på kontosidan."
+
+#: accounts/templates/accounts/register.html:16
+msgid "Could not begin registration."
+msgstr "Kunde inte påbörja registreringen."
+
+#: accounts/templates/accounts/register.html:17
+msgid "Registration failed."
+msgstr "Registreringen misslyckades."
+
+#: accounts/templates/accounts/register.html:21
+msgid "Username"
+msgstr "Användarnamn"
+
+#: accounts/templates/accounts/register.html:32
+msgid "Optional. 3–50 characters."
+msgstr "Valfritt. 3–50 tecken."
+
+#: accounts/templates/accounts/register.html:40
+msgid "Register with passkey"
+msgstr "Registrera med passkey"
+
+#: accounts/templates/accounts/register.html:44
+msgid "Already have an account?"
+msgstr "Har du redan ett konto?"
+
+#: accounts/views.py:105
+msgid "Invalid request body."
+msgstr "Ogiltig förfrågan."
+
+#: accounts/views.py:111 accounts/views.py:431
+msgid "Username must be 3–50 characters."
+msgstr "Användarnamnet måste vara 3–50 tecken."
+
+#: accounts/views.py:115 accounts/views.py:155 accounts/views.py:436
+msgid "That username is already taken."
+msgstr "Det användarnamnet är redan taget."
+
+#: accounts/views.py:127
+msgid "No registration session found. Please start over."
+msgstr "Ingen registreringssession hittades. Börja om från början."
+
+#: accounts/views.py:151
+msgid "Registration session expired. Please try again."
+msgstr "Registreringssessionen har gått ut. Försök igen."
+
+#: accounts/views.py:163 accounts/views.py:359
+msgid "Verification failed. Please try again."
+msgstr "Verifieringen misslyckades. Försök igen."
+
+#: accounts/views.py:216
+msgid "Authentication session expired. Please try again."
+msgstr "Autentiseringssessionen har gått ut. Försök igen."
+
+#: accounts/views.py:265 accounts/views.py:285
+msgid "Authentication failed. Please try again."
+msgstr "Autentiseringen misslyckades. Försök igen."
+
+#: accounts/views.py:277
+msgid "Passkey not recognised."
+msgstr "Passkey känns inte igen."
+
+#: accounts/views.py:328
+#, python-format
+msgid "You have reached the maximum number of passkeys (%(max)s)."
+msgstr "Du har nått det maximala antalet passkeys (%(max)s)."
+
+#: accounts/views.py:351
+msgid "Session expired. Please try again."
+msgstr "Sessionen har gått ut. Försök igen."
+
+#: accounts/views.py:387
+msgid "You must keep at least one passkey."
+msgstr "Du måste behålla minst en passkey."
+
+#: accounts/views.py:392
+msgid "Passkey not found."
+msgstr "Passkey hittades inte."
+
+#: accounts/views.py:408
+msgid "Passkey deleted."
+msgstr "Passkey raderad."
+
+#: accounts/views.py:448
+msgid "Username updated."
+msgstr "Användarnamnet uppdaterat."
+
+#: editor/templates/editor/document_detail.html:24
+msgid "Document title"
+msgstr "Dokumenttitel"
+
+#: editor/templates/editor/document_detail.html:35
+msgid "Connected"
+msgstr "Ansluten"
+
+#: editor/templates/editor/document_detail.html:36
+msgid "Reconnecting…"
+msgstr "Återansluter…"
+
+#: editor/templates/editor/document_detail.html:46
+msgid "Markdown"
+msgstr "Markdown"
+
+#: editor/templates/editor/document_detail.html:65
+msgid "Preview"
+msgstr "Förhandsgranskning"
+
+#: editor/templates/editor/document_detail.html:67
+msgid "Online:"
+msgstr "Online:"
+
+#: editor/templates/editor/document_list.html:3
+#: editor/templates/editor/document_list.html:7 templates/base.html:51
+msgid "Documents"
+msgstr "Dokument"
+
+#: editor/templates/editor/document_list.html:9
+#: editor/templates/editor/document_new.html:3
+#: editor/templates/editor/document_new.html:7
+msgid "New document"
+msgstr "Nytt dokument"
+
+#: editor/templates/editor/document_list.html:17
+#, python-format
+msgid "by %(name)s"
+msgstr "av %(name)s"
+
+#: editor/templates/editor/document_list.html:18
+#, python-format
+msgid "— last edited by %(name)s"
+msgstr "— senast redigerad av %(name)s"
+
+#: editor/templates/editor/document_list.html:24
+msgid "Delete this document?"
+msgstr "Radera detta dokument?"
+
+#: editor/templates/editor/document_list.html:36
+msgid "No documents yet."
+msgstr "Inga dokument ännu."
+
+#: editor/templates/editor/document_list.html:36
+msgid "Create the first one."
+msgstr "Skapa det första."
+
+#: editor/templates/editor/document_new.html:11
+msgid "Title"
+msgstr "Titel"
+
+#: editor/templates/editor/document_new.html:18
+msgid "Untitled"
+msgstr "Namnlös"
+
+#: editor/templates/editor/document_new.html:21
+msgid "Create"
+msgstr "Skapa"
+
+#: editor/templates/editor/document_new.html:22
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: editor/views.py:62
+msgid "Document deleted."
+msgstr "Dokumentet raderat."
+
+#: home/templates/home/index.html:8
+msgid ""
+"A shared online markdown editor. Log in with a passkey to create and "
+"collaborate on documents."
+msgstr ""
+"En delad online-markdownredigerare. Logga in med en passkey för att skapa "
+"och samarbeta kring dokument."
+
+#: home/templates/home/index.html:13
+msgid "Your browser does not support passkeys. Please try a modern browser."
+msgstr "Din webbläsare stöder inte passkeys. Prova en modern webbläsare."
+
+#: templates/base.html:10 templates/base_slim.html:10
+msgid "A shared online markdown editor."
+msgstr "En delad online-markdownredigerare."
+
+#: templates/base.html:27 templates/base.html:28 templates/base.html:31
+msgid "Home"
+msgstr "Hem"
+
+#: templates/base.html:37
+#, python-format
+msgid "Account (%(name)s)"
+msgstr "Konto (%(name)s)"
+
+#: templates/base.html:40
+msgid "Log out"
+msgstr "Logga ut"
+
+#: templates/base.html:59 templates/base_slim.html:26
+msgid "Notifications"
+msgstr "Notiser"
+
+#: templates/base.html:80 templates/base_slim.html:38
+msgid "Loading"
+msgstr "Laddar"

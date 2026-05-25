@@ -1,11 +1,13 @@
-{% load static django_htmx %}
+{% load static django_htmx i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>{% block title %}MarkShareEdit{% endblock %}</title>
-  <meta name="description" content="A shared online markdown editor.">
+  <meta name="description" content="{% trans "A shared online markdown editor." %}">
   <link rel="icon" type="image/png" href="{% static 'favicon/favicon-96x96.png' %}" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
   <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
@@ -22,20 +24,20 @@
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <div class="page layout__page {% block page_class %}{% endblock %}">
     <header class="header layout__header">
-      <a href="{% url 'index' %}" title="Home" rel="home" class="header__logo">
-        <img alt="Home" src="{% static 'favicon/favicon.svg' %}" width="48" height="48" class="header__logo-image">
+      <a href="{% url 'index' %}" title="{% trans 'Home' %}" rel="home" class="header__logo">
+        <img alt="{% trans 'Home' %}" src="{% static 'favicon/favicon.svg' %}" width="48" height="48" class="header__logo-image">
       </a>
       <span class="header__site-name">
-        <a href="{% url 'index' %}" title="Home" class="header__site-link" rel="home"><span>MarkShareEdit</span></a>
+        <a href="{% url 'index' %}" title="{% trans 'Home' %}" class="header__site-link" rel="home"><span>MarkShareEdit</span></a>
       </span>
       {% if user.is_authenticated %}
       <div class="region header__region">
         <nav class="secondary-menu" aria-label="Secondary navigation">
           <ul class="flex-inline mx--0">
-            <li><a href="{% url 'account' %}">Account ({{ user.get_display_name }})</a></li>
+            <li><a href="{% url 'account' %}">{% blocktrans with name=user.get_display_name %}Account ({{ name }}){% endblocktrans %}</a></li>
             <li><form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
-              <button class="button button--small" type="submit">Log out</button>
+              <button class="button button--small" type="submit">{% trans "Log out" %}</button>
             </form></li>
           </ul>
         </nav>
@@ -46,7 +48,7 @@
     {% if user.is_authenticated %}
     <nav class="main-menu mx--xs layout__navigation" aria-label="Main navigation">
       <ul class="flex-inline mx--0">
-        <li><a href="{% url 'document_list' %}">Documents</a></li>
+        <li><a href="{% url 'document_list' %}">{% trans "Documents" %}</a></li>
         {% block menu_extra %}{% endblock %}
       </ul>
     </nav>
@@ -54,7 +56,7 @@
 
     <main class="main layout__main">
       {% if messages %}
-        <ul class="messages" aria-label="Notifications">
+        <ul class="messages" aria-label="{% trans 'Notifications' %}">
           {% for message in messages %}
             <li class="message {{ message.tags }}" role="status">{{ message }}</li>
           {% endfor %}
@@ -75,7 +77,7 @@
 
   {% block modal %}{% endblock %}
 
-  <div id="htmx-indicator" class="htmx-indicator" aria-live="polite" aria-label="Loading"></div>
+  <div id="htmx-indicator" class="htmx-indicator" aria-live="polite" aria-label="{% trans 'Loading' %}"></div>
 
   {% block extra_scripts %}{% endblock %}
 </body>

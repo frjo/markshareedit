@@ -1,16 +1,16 @@
 {% extends "base_slim.html" %}
-{% load static %}
+{% load static i18n %}
 {% block title %}MarkShareEdit{% endblock %}
 
 {% block content %}
   <section>
     <h1>MarkShareEdit</h1>
-    <p>A shared online markdown editor. Log in with a passkey to create and collaborate on documents.</p>
+    <p>{% trans "A shared online markdown editor. Log in with a passkey to create and collaborate on documents." %}</p>
     <div data-passkey-ui hidden>
-      <a href="{% url 'login' %}" class="button">Log in</a>
-      <a href="{% url 'register' %}" class="button button--alt">Create account</a>
+      <a href="{% url 'login' %}" class="button">{% trans "Log in" %}</a>
+      <a href="{% url 'register' %}" class="button button--alt">{% trans "Create account" %}</a>
     </div>
-    <p id="no-passkey-msg" class="form-error" hidden>Your browser does not support passkeys. Please try a modern browser.</p>
+    <p id="no-passkey-msg" class="form-error" hidden>{% trans "Your browser does not support passkeys. Please try a modern browser." %}</p>
   </section>
 {% endblock %}
 

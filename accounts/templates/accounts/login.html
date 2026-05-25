@@ -1,11 +1,11 @@
 {% extends "base_slim.html" %}
-{% load static %}
-{% block title %}Log in — MarkShareEdit{% endblock %}
+{% load static i18n %}
+{% block title %}{% trans "Log in" %} — MarkShareEdit{% endblock %}
 
 {% block content %}
   <section>
-    <h1>Log in</h1>
-    <p>Use a passkey saved on this device to log in.</p>
+    <h1>{% trans "Log in" %}</h1>
+    <p>{% trans "Use a passkey saved on this device to log in." %}</p>
 
     {# Hidden input enables conditional mediation (passkey autofill in browser UI) #}
     <input type="text" name="username" autocomplete="username webauthn" hidden aria-hidden="true">
@@ -21,11 +21,11 @@
         data-complete-url="{% url 'login_complete' %}"
         data-next-url="{{ request.GET.next|default:'' }}"
         onclick="window.markshare.passkeys.authenticate()"
-      >Log in with passkey</button>
+      >{% trans "Log in with passkey" %}</button>
     </div>
 
-    <p id="no-passkey-msg" class="form-error" hidden>Your browser does not support passkeys.</p>
-    <p>Don't have an account yet? <a href="{% url 'register' %}">Create account</a></p>
+    <p id="no-passkey-msg" class="form-error" hidden>{% trans "Your browser does not support passkeys." %}</p>
+    <p>{% trans "Don't have an account yet?" %} <a href="{% url 'register' %}">{% trans "Create account" %}</a></p>
   </section>
 {% endblock %}
 

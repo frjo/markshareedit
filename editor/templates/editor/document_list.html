@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Documents — MarkShareEdit{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Documents" %} — MarkShareEdit{% endblock %}
 
 {% block content %}
   <section>
-    <h1>Documents</h1>
+    <h1>{% trans "Documents" %}</h1>
 
-    <p><a href="{% url 'document_new' %}" class="button">New document</a></p>
+    <p><a href="{% url 'document_new' %}" class="button">{% trans "New document" %}</a></p>
 
     {% if documents %}
       <ul class="document-list">
@@ -13,25 +14,26 @@
           <li class="document-list__item">
             <a href="{% url 'document_detail' pk=doc.pk %}">{{ doc.title }}</a>
             <span class="meta">
-              by {{ doc.created_by.get_display_name }}
-              {% if doc.updated_by %}— last edited by {{ doc.updated_by.get_display_name }}{% endif %}
+              {% blocktrans with name=doc.created_by.get_display_name %}by {{ name }}{% endblocktrans %}
+              {% if doc.updated_by %}{% blocktrans with name=doc.updated_by.get_display_name %}— last edited by {{ name }}{% endblocktrans %}{% endif %}
               · <time datetime="{{ doc.updated_at|date:"Y-m-d" }}">{{ doc.updated_at|date:"DATE_FORMAT" }}</time>
             </span>
             {% if doc.created_by == user or user.is_staff %}
               <form method="post" action="{% url 'document_delete' pk=doc.pk %}" class="inline-form">
                 {% csrf_token %}
+                {% trans "Delete this document?" as confirm_delete %}
                 <button
                   type="submit"
                   class="button button--small button--outline button--delete"
-                  onclick="return confirm('Delete this document?')"
-                >Delete</button>
+                  onclick="return confirm('{{ confirm_delete }}')"
+                >{% trans "Delete" %}</button>
               </form>
             {% endif %}
           </li>
         {% endfor %}
       </ul>
     {% else %}
-      <p>No documents yet. <a href="{% url 'document_new' %}">Create the first one.</a></p>
+      <p>{% trans "No documents yet." %} <a href="{% url 'document_new' %}">{% trans "Create the first one." %}</a></p>
     {% endif %}
   </section>
 {% endblock %}

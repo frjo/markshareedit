@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-25 17:50+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: accounts/templates/accounts/_passkeys_list.html:7
+#, python-format
+msgid "Passkey %(counter)s"
+msgstr "Passkey %(counter)s"
+
+#: accounts/templates/accounts/_passkeys_list.html:8
+msgid "added"
+msgstr "added"
+
+#: accounts/templates/accounts/_passkeys_list.html:9
+msgid "last used"
+msgstr "last used"
+
+#: accounts/templates/accounts/_passkeys_list.html:17
+msgid "Delete this passkey?"
+msgstr "Delete this passkey?"
+
+#: accounts/templates/accounts/_passkeys_list.html:18
+#: editor/templates/editor/document_list.html:29
+msgid "Delete"
+msgstr "Delete"
+
+#: accounts/templates/accounts/_passkeys_list.html:24
+msgid "No passkeys found."
+msgstr "No passkeys found."
+
+#: accounts/templates/accounts/account.html:3
+#: accounts/templates/accounts/account.html:7
+msgid "Account"
+msgstr "Account"
+
+#: accounts/templates/accounts/account.html:10
+msgid "Profile"
+msgstr "Profile"
+
+#: accounts/templates/accounts/account.html:12
+msgid "Account ID"
+msgstr "Account ID"
+
+#: accounts/templates/accounts/account.html:19
+msgid "Display username"
+msgstr "Display username"
+
+#: accounts/templates/accounts/account.html:30
+msgid "3–50 characters."
+msgstr "3–50 characters."
+
+#: accounts/templates/accounts/account.html:32
+msgid "Update username"
+msgstr "Update username"
+
+#: accounts/templates/accounts/account.html:37
+msgid "Passkeys"
+msgstr "Passkeys"
+
+#: accounts/templates/accounts/account.html:41
+msgid "Add a passkey"
+msgstr "Add a passkey"
+
+#: accounts/templates/accounts/account.html:46
+msgid "Could not begin passkey registration."
+msgstr "Could not begin passkey registration."
+
+#: accounts/templates/accounts/account.html:47
+msgid "Passkey registration failed."
+msgstr "Passkey registration failed."
+
+#: accounts/templates/accounts/account.html:48
+#: accounts/templates/accounts/register.html:18
+msgid "A passkey for this authenticator is already registered."
+msgstr "A passkey for this authenticator is already registered."
+
+#: accounts/templates/accounts/account.html:52
+msgid "Passkey name (optional)"
+msgstr "Passkey name (optional)"
+
+#: accounts/templates/accounts/account.html:53
+msgid "e.g. MacBook Touch ID"
+msgstr "e.g. MacBook Touch ID"
+
+#: accounts/templates/accounts/account.html:56
+msgid "Add passkey"
+msgstr "Add passkey"
+
+#: accounts/templates/accounts/login.html:3
+#: accounts/templates/accounts/login.html:7
+#: accounts/templates/accounts/register.html:44
+#: home/templates/home/index.html:10
+msgid "Log in"
+msgstr "Log in"
+
+#: accounts/templates/accounts/login.html:8
+msgid "Use a passkey saved on this device to log in."
+msgstr "Use a passkey saved on this device to log in."
+
+#: accounts/templates/accounts/login.html:24
+msgid "Log in with passkey"
+msgstr "Log in with passkey"
+
+#: accounts/templates/accounts/login.html:27
+#: accounts/templates/accounts/register.html:43
+msgid "Your browser does not support passkeys."
+msgstr "Your browser does not support passkeys."
+
+#: accounts/templates/accounts/login.html:28
+msgid "Don't have an account yet?"
+msgstr "Don't have an account yet?"
+
+#: accounts/templates/accounts/login.html:28 home/templates/home/index.html:11
+msgid "Create account"
+msgstr "Create account"
+
+#: accounts/templates/accounts/register.html:3
+msgid "Register"
+msgstr "Register"
+
+#: accounts/templates/accounts/register.html:7
+msgid "Create an account"
+msgstr "Create an account"
+
+#: accounts/templates/accounts/register.html:8
+msgid ""
+"Optionally choose a username, then follow the prompt to create a passkey on "
+"this device. You can set or change your username later on the account page."
+msgstr ""
+"Optionally choose a username, then follow the prompt to create a passkey on "
+"this device. You can set or change your username later on the account page."
+
+#: accounts/templates/accounts/register.html:16
+msgid "Could not begin registration."
+msgstr "Could not begin registration."
+
+#: accounts/templates/accounts/register.html:17
+msgid "Registration failed."
+msgstr "Registration failed."
+
+#: accounts/templates/accounts/register.html:21
+msgid "Username"
+msgstr "Username"
+
+#: accounts/templates/accounts/register.html:32
+msgid "Optional. 3–50 characters."
+msgstr "Optional. 3–50 characters."
+
+#: accounts/templates/accounts/register.html:40
+msgid "Register with passkey"
+msgstr "Register with passkey"
+
+#: accounts/templates/accounts/register.html:44
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+#: accounts/views.py:105
+msgid "Invalid request body."
+msgstr "Invalid request body."
+
+#: accounts/views.py:111 accounts/views.py:431
+msgid "Username must be 3–50 characters."
+msgstr "Username must be 3–50 characters."
+
+#: accounts/views.py:115 accounts/views.py:155 accounts/views.py:436
+msgid "That username is already taken."
+msgstr "That username is already taken."
+
+#: accounts/views.py:127
+msgid "No registration session found. Please start over."
+msgstr "No registration session found. Please start over."
+
+#: accounts/views.py:151
+msgid "Registration session expired. Please try again."
+msgstr "Registration session expired. Please try again."
+
+#: accounts/views.py:163 accounts/views.py:359
+msgid "Verification failed. Please try again."
+msgstr "Verification failed. Please try again."
+
+#: accounts/views.py:216
+msgid "Authentication session expired. Please try again."
+msgstr "Authentication session expired. Please try again."
+
+#: accounts/views.py:265 accounts/views.py:285
+msgid "Authentication failed. Please try again."
+msgstr "Authentication failed. Please try again."
+
+#: accounts/views.py:277
+msgid "Passkey not recognised."
+msgstr "Passkey not recognised."
+
+#: accounts/views.py:328
+#, python-format
+msgid "You have reached the maximum number of passkeys (%(max)s)."
+msgstr "You have reached the maximum number of passkeys (%(max)s)."
+
+#: accounts/views.py:351
+msgid "Session expired. Please try again."
+msgstr "Session expired. Please try again."
+
+#: accounts/views.py:387
+msgid "You must keep at least one passkey."
+msgstr "You must keep at least one passkey."
+
+#: accounts/views.py:392
+msgid "Passkey not found."
+msgstr "Passkey not found."
+
+#: accounts/views.py:408
+msgid "Passkey deleted."
+msgstr "Passkey deleted."
+
+#: accounts/views.py:448
+msgid "Username updated."
+msgstr "Username updated."
+
+#: editor/templates/editor/document_detail.html:24
+msgid "Document title"
+msgstr "Document title"
+
+#: editor/templates/editor/document_detail.html:35
+msgid "Connected"
+msgstr "Connected"
+
+#: editor/templates/editor/document_detail.html:36
+msgid "Reconnecting…"
+msgstr "Reconnecting…"
+
+#: editor/templates/editor/document_detail.html:46
+msgid "Markdown"
+msgstr "Markdown"
+
+#: editor/templates/editor/document_detail.html:65
+msgid "Preview"
+msgstr "Preview"
+
+#: editor/templates/editor/document_detail.html:67
+msgid "Online:"
+msgstr "Online:"
+
+#: editor/templates/editor/document_list.html:3
+#: editor/templates/editor/document_list.html:7 templates/base.html:51
+msgid "Documents"
+msgstr "Documents"
+
+#: editor/templates/editor/document_list.html:9
+#: editor/templates/editor/document_new.html:3
+#: editor/templates/editor/document_new.html:7
+msgid "New document"
+msgstr "New document"
+
+#: editor/templates/editor/document_list.html:17
+#, python-format
+msgid "by %(name)s"
+msgstr "by %(name)s"
+
+#: editor/templates/editor/document_list.html:18
+#, python-format
+msgid "— last edited by %(name)s"
+msgstr "— last edited by %(name)s"
+
+#: editor/templates/editor/document_list.html:24
+msgid "Delete this document?"
+msgstr "Delete this document?"
+
+#: editor/templates/editor/document_list.html:36
+msgid "No documents yet."
+msgstr "No documents yet."
+
+#: editor/templates/editor/document_list.html:36
+msgid "Create the first one."
+msgstr "Create the first one."
+
+#: editor/templates/editor/document_new.html:11
+msgid "Title"
+msgstr "Title"
+
+#: editor/templates/editor/document_new.html:18
+msgid "Untitled"
+msgstr "Untitled"
+
+#: editor/templates/editor/document_new.html:21
+msgid "Create"
+msgstr "Create"
+
+#: editor/templates/editor/document_new.html:22
+msgid "Cancel"
+msgstr "Cancel"
+
+#: editor/views.py:62
+msgid "Document deleted."
+msgstr "Document deleted."
+
+#: home/templates/home/index.html:8
+msgid ""
+"A shared online markdown editor. Log in with a passkey to create and "
+"collaborate on documents."
+msgstr ""
+"A shared online markdown editor. Log in with a passkey to create and "
+"collaborate on documents."
+
+#: home/templates/home/index.html:13
+msgid "Your browser does not support passkeys. Please try a modern browser."
+msgstr "Your browser does not support passkeys. Please try a modern browser."
+
+#: templates/base.html:10 templates/base_slim.html:10
+msgid "A shared online markdown editor."
+msgstr "A shared online markdown editor."
+
+#: templates/base.html:27 templates/base.html:28 templates/base.html:31
+msgid "Home"
+msgstr "Home"
+
+#: templates/base.html:37
+#, python-format
+msgid "Account (%(name)s)"
+msgstr "Account (%(name)s)"
+
+#: templates/base.html:40
+msgid "Log out"
+msgstr "Log out"
+
+#: templates/base.html:59 templates/base_slim.html:26
+msgid "Notifications"
+msgstr "Notifications"
+
+#: templates/base.html:80 templates/base_slim.html:38
+msgid "Loading"
+msgstr "Loading"

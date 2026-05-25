@@ -1,0 +1,24 @@
+{% extends "base_slim.html" %}
+{% load static %}
+{% block title %}MarkShareEdit{% endblock %}
+
+{% block content %}
+  <section>
+    <h1>MarkShareEdit</h1>
+    <p>A shared online markdown editor. Log in with a passkey to create and collaborate on documents.</p>
+    <div data-passkey-ui hidden>
+      <a href="{% url 'login' %}" class="button">Log in</a>
+      <a href="{% url 'register' %}" class="button button--alt">Create account</a>
+    </div>
+    <p id="no-passkey-msg" class="form-error" hidden>Your browser does not support passkeys. Please try a modern browser.</p>
+  </section>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{% static 'js/passkeys.js' %}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      window.markshare?.passkeys?.initUI();
+    });
+  </script>
+{% endblock %}

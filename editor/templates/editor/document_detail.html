@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ document.title }} — MarkShareEdit{% endblock %}
+
+{% block page_class %}page--editor{% endblock %}
+
+{% block menu_extra %}
+  <li class="meta">
+    <form
+      id="rename-form"
+      hx-post="{% url 'document_rename' pk=document.pk %}"
+      hx-target="#document-title"
+      hx-swap="outerHTML"
+      style="display: contents"
+    >
+      {% csrf_token %}
+      <input
+        type="text"
+        name="title"
+        id="doc-title-input"
+        value="{{ document.title }}"
+        maxlength="200"
+        class="doc-title-input"
+        aria-label="Document title"
+        hx-trigger="change"
+        hx-post="{% url 'document_rename' pk=document.pk %}"
+        hx-target="#document-title"
+        hx-swap="outerHTML"
+        hx-include="[name=csrfmiddlewaretoken]"
+      >
+    </form>
+  </li>
+{% endblock %}
+
+{% block content %}
+  <div
+    x-data="markshare.editorComponent('{{ document.id }}', '{{ ws_scheme }}')"
+    x-init="init()"
+    class="editor-layout"
+  >
+    <div class="editor__pane">
+      <div class="editor__pane-header">
+        <span class="editor__label">Markdown</span>
+        <span
+          class="editor__status"
+          :class="isConnected ? 'editor__status--connected' : 'editor__status--disconnected'"
+          x-text="isConnected ? 'Connected' : 'Reconnecting…'"
+        ></span>
+      </div>
+      <textarea
+        id="editor-textarea"
+        class="editor__textarea"
+        spellcheck="true"
+        autocomplete="off"
+        @input="onInput($event)"
+        :value="content"
+      >{{ document.content }}</textarea>
+    </div>
+
+    <div class="editor__pane">
+      <div class="editor__pane-header">
+        <span class="editor__label">Preview</span>
+        <span class="editor__presence meta" x-show="members.length > 1" x-cloak>
+          Online: <span x-text="members.join(', ')"></span>
+        </span>
+      </div>
+      <div
+        id="editor-preview"
+        class="editor__preview prose"
+        x-html="preview"
+      ></div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_head %}
+  <script src="{% static 'libs/marked.min.js' %}"></script>
+{% endblock %}
+
+{% block extra_scripts %}
+  <script src="{% static 'js/editor.js' %}"></script>
+{% endblock %}

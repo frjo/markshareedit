@@ -4,4 +4,58 @@ version = "0.1.0"
 description = "A shared online markdown editor."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+
+dependencies = [
+    "cuid2>=2.0.1",
+    "django>=6.0.4",
+    "channels>=4.2.0",
+    "django-htmx>=1.27.0",
+    "django-nh3>=0.3.1",
+    "django-ratelimit>=4.1.0",
+    "environs>=15.0.1",
+    "psycopg[binary]>=3.2.0",
+    "python-slugify>=8.0.4",
+    "webauthn>=2.2.0",
+    "granian>=2.7.4",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=6.3.0",
+    "django-extensions>=4.1",
+    "pre-commit>=4.6.0",
+    "pytest-django>=4.12.0",
+    "ruff>=0.15.11",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+required-version = ">=0.5.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+
+[tool.ruff.lint]
+ignore = [
+    "E501",
+    "C901",
+]
+select = [
+    'C',
+    'B',
+    'E',
+    'F',
+    'I',
+    'W',
+]
+
+[tool.ruff.lint.per-file-ignores]
+"config/*.py" = ["F405"]
+
+[tool.typos.files]
+extend-exclude = [
+    ".git/",
+    "*migrations*",
+    "*.min.js",
+    "*.css.map",
+]

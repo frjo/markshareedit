@@ -1,0 +1,35 @@
+/* Box */
+
+.box {
+  /* Add vertical rhythm margins. */
+  margin-block: var(--spacing-m);
+  padding: var(--spacing-xs);
+  border: 5px solid var(--color-border);
+
+  .box__title,
+  .title {
+    margin-block-start: 0;
+  }
+
+  & > * {
+    &:first-child {
+      margin-block-start: 0;
+    }
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
+.box--highlight {
+  border-color: var(--color-highlight);
+}
+
+.box--fit {
+  width: fit-content;
+}
+
+.box--gutter {
+  padding-inline: var(--gutters);
+}

@@ -1,0 +1,82 @@
+{% load static django_htmx %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{% block title %}MarkShareEdit{% endblock %}</title>
+  <meta name="description" content="A shared online markdown editor.">
+  <link rel="icon" type="image/png" href="{% static 'favicon/favicon-96x96.png' %}" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}">
+  <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
+  <link rel="apple-touch-icon" href="{% static 'favicon/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+  <style> [x-cloak] {display: none !important} </style>
+  <script defer src="{% static 'libs/alpine.min.js' %}"></script>
+  {% htmx_script %}
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div class="page layout__page {% block page_class %}{% endblock %}">
+    <header class="header layout__header">
+      <a href="{% url 'index' %}" title="Home" rel="home" class="header__logo">
+        <img alt="Home" src="{% static 'favicon/favicon.svg' %}" width="48" height="48" class="header__logo-image">
+      </a>
+      <span class="header__site-name">
+        <a href="{% url 'index' %}" title="Home" class="header__site-link" rel="home"><span>MarkShareEdit</span></a>
+      </span>
+      {% if user.is_authenticated %}
+      <div class="region header__region">
+        <nav class="secondary-menu" aria-label="Secondary navigation">
+          <ul class="flex-inline mx--0">
+            <li><a href="{% url 'account' %}">Account ({{ user.get_display_name }})</a></li>
+            <li><form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button class="button button--small" type="submit">Log out</button>
+            </form></li>
+          </ul>
+        </nav>
+      </div>
+      {% endif %}
+    </header>
+
+    {% if user.is_authenticated %}
+    <nav class="main-menu mx--xs layout__navigation" aria-label="Main navigation">
+      <ul class="flex-inline mx--0">
+        <li><a href="{% url 'document_list' %}">Documents</a></li>
+        {% block menu_extra %}{% endblock %}
+      </ul>
+    </nav>
+    {% endif %}
+
+    <main class="main layout__main">
+      {% if messages %}
+        <ul class="messages" aria-label="Notifications">
+          {% for message in messages %}
+            <li class="message {{ message.tags }}" role="status">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </main>
+
+    {% block sidebar %}{% endblock %}
+
+    <footer class="footer layout__footer mt--l grid-center">
+      <ul class="flex-inline">
+        <li>MarkShareEdit</li>
+      </ul>
+    </footer>
+  </div>
+
+  {% block modal %}{% endblock %}
+
+  <div id="htmx-indicator" class="htmx-indicator" aria-live="polite" aria-label="Loading"></div>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}New document — MarkShareEdit{% endblock %}
+
+{% block content %}
+  <section>
+    <h1>New document</h1>
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          maxlength="200"
+          autofocus
+          placeholder="Untitled"
+        >
+      </div>
+      <button type="submit">Create</button>
+      <a href="{% url 'document_list' %}">Cancel</a>
+    </form>
+  </section>
+{% endblock %}

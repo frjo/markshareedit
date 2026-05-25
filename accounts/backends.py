@@ -4,8 +4,9 @@ from accounts.models import User
 class PasskeyBackend:
     """Authentication backend for passkey (WebAuthn) login.
 
-    WebAuthn verification happens in the view before login() is called.
-    This backend exists so Django's login() knows how to look up a user by PK.
+    We never call authenticate() with credentials here — the WebAuthn
+    verification happens in the view before login() is called.  This
+    backend exists so Django's login() knows how to look up a user by PK.
     """
 
     def authenticate(self, request, user=None, **kwargs):

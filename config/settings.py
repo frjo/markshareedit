@@ -65,6 +65,7 @@ WEBAUTHN_ORIGIN = env.str("WEBAUTHN_ORIGIN", "http://localhost:8000")
 # Rate-Limit configuration
 # ---------------------------------------------------------------------------
 DEFAULT_RATE_LIMIT = env.str("DEFAULT_RATE_LIMIT", "5/m")
+LAX_RATE_LIMIT = env.str("LAX_RATE_LIMIT", "1/s")
 STRICT_RATE_LIMIT = env.str("STRICT_RATE_LIMIT", "10/h")
 
 # ---------------------------------------------------------------------------
@@ -110,6 +111,7 @@ CACHES = {
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "assets"]
 STATIC_ROOT = env.str("STATIC_ROOT", BASE_DIR / "static")
+MEDIA_ROOT = env.str("MEDIA_ROOT", BASE_DIR / "media")
 
 # ---------------------------------------------------------------------------
 # Development
@@ -125,6 +127,10 @@ if DEBUG and not TESTING:
         *MIDDLEWARE,
     ]
     INTERNAL_IPS = ["127.0.0.1"]
+
+    # We disable all panels by default here since some of them (SQL, Template,
+    # Profiling) can be very CPU intensive for this site.  However disabled panels
+    # can be easily toggled on in the UI.
     DEBUG_TOOLBAR_CONFIG = {
         "DISABLE_PANELS": {
             "debug_toolbar.panels.history.HistoryPanel",

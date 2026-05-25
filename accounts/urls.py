@@ -13,6 +13,10 @@ urlpatterns = [
     path("logout/", views.logout_view, name="logout"),
     path("account/", views.account_view, name="account"),
     path("passkeys/add/begin/", views.passkey_add_begin, name="passkey_add_begin"),
-    path("passkeys/add/complete/", views.passkey_add_complete, name="passkey_add_complete"),
+    path(
+        "passkeys/add/complete/",
+        views.passkey_add_complete,
+        name="passkey_add_complete",
+    ),
     path("passkeys/delete/<str:pk>/", views.passkey_delete, name="passkey_delete"),
 ]

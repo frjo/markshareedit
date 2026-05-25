@@ -112,7 +112,9 @@ def register_username(request):
                 status=400,
             )
         if User.objects.filter(username=username).exists():
-            return JsonResponse({"error": _("That username is already taken.")}, status=400)
+            return JsonResponse(
+                {"error": _("That username is already taken.")}, status=400
+            )
 
     request.session["reg_username"] = username
     return JsonResponse({"status": "ok"})
@@ -121,7 +123,7 @@ def register_username(request):
 @require_POST
 @ratelimit(key="ip", rate=settings.STRICT_RATE_LIMIT)
 def register_begin(request):
-    """Begin passkey registration for a new user."""
+    """Begin passkey registration for a new user (username may be absent)."""
     if "reg_username" not in request.session:
         return JsonResponse(
             {"error": _("No registration session found. Please start over.")}, status=400
@@ -160,7 +162,9 @@ def register_complete(request):
         verification, transports = _verify_registration(data, challenge)
     except Exception:
         logger.exception("WebAuthn registration verification failed")
-        return JsonResponse({"error": _("Verification failed. Please try again.")}, status=400)
+        return JsonResponse(
+            {"error": _("Verification failed. Please try again.")}, status=400
+        )
 
     user = User.objects.create_user(username=username)
     WebAuthnCredential.objects.create(
@@ -295,7 +299,9 @@ def login_complete(request):
     )
 
     next_url = data.get("next", "").strip()
-    if not url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+    if not url_has_allowed_host_and_scheme(
+        next_url, allowed_hosts={request.get_host()}
+    ):
         next_url = "/"
 
     return JsonResponse({"status": "ok", "redirect_url": next_url or "/"})
@@ -325,19 +331,23 @@ def passkey_add_begin(request):
     user = request.user
     if user.credentials.count() >= _MAX_PASSKEYS:
         return JsonResponse(
-            {"error": _("You have reached the maximum number of passkeys (%(max)s).") % {"max": _MAX_PASSKEYS}},
+            {
+                "error": _("You have reached the maximum number of passkeys (%(max)s).")
+                % {"max": _MAX_PASSKEYS}
+            },
             status=400,
         )
-    display_name = user.username or user.get_display_name
-    user_handle = base64.urlsafe_b64encode(
-        (user.username or user.id).encode()
-    ).rstrip(b"=")
+    user_handle = base64.urlsafe_b64encode(user.username.encode()).rstrip(b"=")
     existing = [
         PublicKeyCredentialDescriptor(id=bytes(c.credential_id))
         for c in user.credentials.all()
     ]
-    options = _registration_options(user_handle, display_name, exclude_credentials=existing)
-    request.session["add_passkey_challenge"] = base64.b64encode(options.challenge).decode()
+    options = _registration_options(
+        user_handle, user.username, exclude_credentials=existing
+    )
+    request.session["add_passkey_challenge"] = base64.b64encode(
+        options.challenge
+    ).decode()
     return JsonResponse(json.loads(options_to_json(options)))
 
 
@@ -348,7 +358,9 @@ def passkey_add_complete(request):
     """Complete adding a new passkey for an already-authenticated user."""
     challenge_b64 = request.session.get("add_passkey_challenge", "")
     if not challenge_b64:
-        return JsonResponse({"error": _("Session expired. Please try again.")}, status=400)
+        return JsonResponse(
+            {"error": _("Session expired. Please try again.")}, status=400
+        )
 
     try:
         challenge = base64.b64decode(challenge_b64)
@@ -356,7 +368,9 @@ def passkey_add_complete(request):
         verification, transports = _verify_registration(data, challenge)
     except Exception:
         logger.exception("WebAuthn passkey-add verification failed")
-        return JsonResponse({"error": _("Verification failed. Please try again.")}, status=400)
+        return JsonResponse(
+            {"error": _("Verification failed. Please try again.")}, status=400
+        )
 
     credential = WebAuthnCredential.objects.create(
         user=request.user,
@@ -385,12 +399,12 @@ def passkey_delete(request, pk: str):
     user = request.user
     if user.credentials.count() <= 1:
         messages.error(request, _("You must keep at least one passkey."))
-        return redirect("account")
+        return redirect("account", slug=user.slug)
     try:
         credential = user.credentials.get(pk=pk)
     except user.credentials.model.DoesNotExist:
         messages.error(request, _("Passkey not found."))
-        return redirect("account")
+        return redirect("account", slug=user.slug)
     credential.delete()
     logger.info(
         "audit: passkey deleted user=%s credential=%s ip=%s",
@@ -406,7 +420,7 @@ def passkey_delete(request, pk: str):
             {"credentials": credentials},
         )
     messages.success(request, _("Passkey deleted."))
-    return redirect("account")
+    return redirect("account", slug=user.slug)
 
 
 # ---------------------------------------------------------------------------
@@ -416,38 +430,44 @@ def passkey_delete(request, pk: str):
 
 @login_required
 @ratelimit(key="user", rate=settings.DEFAULT_RATE_LIMIT)
-def account_view(request):
+def account_view(request, slug: str = ""):
     user = request.user
     credentials = user.credentials.order_by("created_at")
 
     if request.method == "POST":
         action = request.POST.get("action")
 
-        if action != "update_username":
+        if action not in {"update_username"}:
             return HttpResponseBadRequest()
 
-        new_username = nh3.clean(request.POST.get("username", "").strip(), tags=set())
-        if not (3 <= len(new_username) <= 50):
-            messages.error(request, _("Username must be 3–50 characters."))
-        elif (
-            new_username != user.username
-            and User.objects.filter(username=new_username).exists()
-        ):
-            messages.error(request, _("That username is already taken."))
-        else:
-            old_username = user.username
-            user.username = new_username
-            user.save(update_fields=["username"])
-            logger.info(
-                "audit: username changed user=%s old=%s new=%s ip=%s",
-                user.pk,
-                old_username,
-                new_username,
-                request.META.get("REMOTE_ADDR"),
+        if action == "update_username":
+            new_username = nh3.clean(
+                request.POST.get("username", "").strip(), tags=set()
             )
-            messages.success(request, _("Username updated."))
+            if not (3 <= len(new_username) <= 50):
+                    messages.error(
+                        request,
+                        _("Username must be 3–50 characters."),
+                    )
+            elif (
+                new_username != user.username
+                and User.objects.filter(username=new_username).exists()
+            ):
+                messages.error(request, _("That username is already taken."))
+            else:
+                old_username = user.username
+                user.username = new_username
+                user.save(update_fields=["username"])
+                logger.info(
+                    "audit: username changed user=%s old=%s new=%s ip=%s",
+                    user.pk,
+                    old_username,
+                    new_username,
+                    request.META.get("REMOTE_ADDR"),
+                )
+                messages.success(request, _("Username updated."))
 
-        return redirect("account")
+        return redirect("account", slug=user.slug)
 
     return render(
         request,

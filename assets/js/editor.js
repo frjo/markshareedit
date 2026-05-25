@@ -11,6 +11,7 @@ window.markshare.editorComponent = (docId, wsScheme) => ({
   content: "",
   preview: "",
   isConnected: false,
+  isSaving: false,
   members: [],
   _socket: null,
   _saveTimer: null,
@@ -60,6 +61,7 @@ window.markshare.editorComponent = (docId, wsScheme) => ({
   onInput(evt) {
     this.content = evt.target.value;
     this.updatePreview();
+    this.isSaving = true;
     clearTimeout(this._saveTimer);
     this._saveTimer = setTimeout(() => this._sendContent(), this._DEBOUNCE_MS);
   },
@@ -68,6 +70,7 @@ window.markshare.editorComponent = (docId, wsScheme) => ({
     if (this._socket?.readyState === WebSocket.OPEN) {
       this._socket.send(JSON.stringify({ type: "content", content: this.content }));
     }
+    this.isSaving = false;
   },
 
   _receiveContent(incoming) {

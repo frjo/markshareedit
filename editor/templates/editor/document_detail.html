@@ -49,6 +49,7 @@
           :class="isConnected ? 'editor__status--connected' : 'editor__status--disconnected'"
           x-text="isConnected ? '{{ label_connected }}' : '{{ label_reconnecting }}'"
         ></span>
+        <span class="editor__saving" x-show="isSaving" x-cloak>{% trans "Saving…" %}</span>
       </div>
       <textarea
         id="editor-textarea"

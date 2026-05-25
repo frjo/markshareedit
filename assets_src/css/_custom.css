@@ -141,6 +141,11 @@ a {
   font-size: var(--fs-xs);
 }
 
+.editor__saving {
+  font-size: var(--fs-xs);
+  color: var(--color-text-meta);
+}
+
 .editor__textarea {
   flex: 1;
   width: 100%;

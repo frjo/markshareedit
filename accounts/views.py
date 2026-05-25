@@ -276,6 +276,10 @@ def login_complete(request):
         return JsonResponse({"error": "Passkey not recognised."}, status=401)
     except Exception:
         logger.exception("WebAuthn authentication verification failed")
+        logger.warning(
+            "audit: login failed (verification error) ip=%s",
+            request.META.get("REMOTE_ADDR"),
+        )
         return JsonResponse(
             {"error": "Authentication failed. Please try again."}, status=401
         )

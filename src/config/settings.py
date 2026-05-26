@@ -7,6 +7,7 @@ from environs import env
 from .django import *  # noqa
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = BASE_DIR.parent
 
 TESTING = "test" in sys.argv or "PYTEST_VERSION" in os.environ
 
@@ -109,7 +110,7 @@ CACHES = {
 # Static files
 # ---------------------------------------------------------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "assets"]
+STATICFILES_DIRS = [ROOT_DIR / "assets"]
 STATIC_ROOT = env.str("STATIC_ROOT", BASE_DIR / "static")
 MEDIA_ROOT = env.str("MEDIA_ROOT", BASE_DIR / "media")
 

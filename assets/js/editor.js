@@ -89,8 +89,8 @@ window.markshare.editorComponent = (docId, wsScheme) => ({
   },
 
   updatePreview() {
-    if (window.marked) {
-      this.preview = window.marked.parse(this.content, { breaks: true });
+    if (window.marked && window.DOMPurify) {
+      this.preview = window.DOMPurify.sanitize(window.marked.parse(this.content, { breaks: true }));
     }
   },
 });

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="135.29086mm"
+   height="67.707748mm"
+   viewBox="0 0 135.29086 67.707748"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     transform="translate(-0.95563639,-1.1940931)">
+    <path
+       d="M 10.698077,10.246023 V 60.62275 h 9.313347 V 20.406036 h 0.14111 l 8.960567,40.216714 h 7.902231 l 8.960567,-40.216714 h 0.14111 V 60.62275 h 9.313346 V 10.246023 H 40.402004 L 33.134773,45.806065 H 32.99366 L 25.796985,10.246023 Z"
+       id="text1"
+       aria-label="M" />
+    <path
+       d="M 81.024355,10.138802 H 71.339721 V 39.585887 H 63.754552 L 76.182038,60.68399 88.609524,39.585887 h -7.585169 z"
+       id="text2"
+       aria-label="⬇" />
+    <g
+       id="g22"
+       transform="translate(-10.506976,-11.163662)">
+      <circle
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.744503"
+         id="path4"
+         cx="-130.54329"
+         cy="27.410839"
+         r="5.6277485"
+         transform="scale(-1,1)" />
+      <circle
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.744503"
+         id="circle4"
+         cx="-130.4617"
+         cy="65.729271"
+         r="5.6277485"
+         transform="scale(-1,1)" />
+      <circle
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.744503"
+         id="circle5"
+         cx="-113.18003"
+         cy="45.499962"
+         r="5.6277485"
+         transform="scale(-1,1)" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.48902px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 130.12249,27.46608 113.4601,45.180341"
+         id="path7" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.57782px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 129.92931,65.641903 113.66151,45.701535"
+         id="path8" />
+    </g>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.795999;stroke-dasharray:none"
+       id="rect20"
+       width="134.49487"
+       height="66.911751"
+       x="1.3536359"
+       y="1.5920925" />
+  </g>
+</svg>

@@ -25,11 +25,12 @@
   <div class="page layout__page {% block page_class %}{% endblock %}">
     <header class="header layout__header">
       <a href="{% url 'index' %}" title="{% trans 'Home' %}" rel="home" class="header__logo">
-        <img alt="{% trans 'Home' %}" src="{% static 'favicon/favicon.svg' %}" width="48" height="48" class="header__logo-image">
+        <img alt="{% trans 'Home' %}" src="{% static 'logo.svg' %}" width="96" height="48" class="header__logo-image">
       </a>
       <span class="header__site-name">
         <a href="{% url 'index' %}" title="{% trans 'Home' %}" class="header__site-link" rel="home"><span>MarkShareEdit</span></a>
       </span>
+
       {% if user.is_authenticated %}
       <div class="region header__region">
         <nav class="secondary-menu" aria-label="Secondary navigation">
@@ -70,12 +71,10 @@
 
     <footer class="footer layout__footer mt--l grid-center">
       <ul class="flex-inline">
-        <li>MarkShareEdit</li>
+        <li>xdeb.net MarkShareEdit</li>
       </ul>
     </footer>
   </div>
-
-  {% block modal %}{% endblock %}
 
   <div id="htmx-indicator" class="htmx-indicator" aria-live="polite" aria-label="{% trans 'Loading' %}"></div>
 
